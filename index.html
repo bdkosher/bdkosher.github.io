@@ -5,7 +5,13 @@
 		<style type="text/css">
 			body {
 				text-align: center;	
+				background: #939393 url('/images/bg-noise.png') left top repeat; /* ie fallback */
+				background: url('/images/bg-noise.png') left top repeat, -webkit-gradient(linear, 0 0, 0 bottom, from(#939393), to(#535353));
+				background: url('/images/bg-noise.png') left top repeat, -webkit-linear-gradient(#939393, #535353);
+				background: url('/images/bg-noise.png') left top repeat, -moz-linear-gradient(#939393, #535353);
 				background: url('/images/bg-noise.png') left top repeat, -ms-linear-gradient(#939393, #535353);
+				background: url('/images/bg-noise.png') left top repeat, -o-linear-gradient(#939393, #535353);
+				background: url('/images/bg-noise.png') left top repeat, linear-gradient(#939393, #535353);
 			}
 			#main { 
 				margin-left: auto;
