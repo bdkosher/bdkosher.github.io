@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>InstantExtension.groovy</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">goodtimes</a> &gt; <a href="index.source.html" class="el_package">bdkosher.goodtimes</a> &gt; <span class="el_source">InstantExtension.groovy</span></div><h1>InstantExtension.groovy</h1><pre class="source lang-java linenums">package bdkosher.goodtimes
+
+import java.time.*
+import java.time.temporal.*
+
+import groovy.transform.PackageScope
+
+/**
+ * Extension methods for java.time.Instant
+ *
+ * Aims to mimic the Groovy JDK extension methods available for java.util.Date and java.util.Calendar instances.
+ */
+class InstantExtension {
+
+    /**
+     * Iterates from this Instant down to the given Instant, inclusive, decrementing by one second each time.
+     */
+    static void downto(final Instant self, Instant to, Closure closure) {
+<span class="fc bfc" id="L19" title="All 2 branches covered.">        if (to &gt; self) {</span>
+<span class="fc" id="L20">            throw new GroovyRuntimeException(&quot;The argument ($to) to downto() cannot be later than the value ($self) it's called on.&quot;)</span>
+        }
+<span class="fc" id="L22">        def paramTypes = closure.parameterTypes</span>
+<span class="pc bpc" id="L23" title="10 of 16 branches missed.">        boolean acceptsDate = paramTypes.length &gt; 0 &amp;&amp; paramTypes[0].isAssignableFrom(Instant)</span>
+<span class="fc" id="L24">        def from = self</span>
+<span class="fc bfc" id="L25" title="All 2 branches covered.">        while (from &gt;= to) {</span>
+<span class="pc bpc" id="L26" title="1 of 2 branches missed.">            acceptsDate ? closure(from) : closure()</span>
+<span class="fc" id="L27">            from = from - 1</span>
+        }
+    }
+
+    /**
+     * Iterates from this Instant down to the given Instant, inclusive, decrementing by one second each time.
+     */
+    static void upto(final Instant self, Instant to, Closure closure) {
+<span class="fc bfc" id="L35" title="All 2 branches covered.">        if (to &lt; self) {</span>
+<span class="fc" id="L36">            throw new GroovyRuntimeException(&quot;The argument ($to) to upto() cannot be earlier than the value ($self) it's called on.&quot;)</span>
+        }
+<span class="fc" id="L38">        def paramTypes = closure.parameterTypes</span>
+<span class="pc bpc" id="L39" title="10 of 16 branches missed.">        boolean acceptsDate = paramTypes.length &gt; 0 &amp;&amp; paramTypes[0].isAssignableFrom(Instant)</span>
+<span class="fc" id="L40">        def from = self</span>
+<span class="fc bfc" id="L41" title="All 2 branches covered.">        while (from &lt;= to) {</span>
+<span class="pc bpc" id="L42" title="1 of 2 branches missed.">            acceptsDate ? closure(from) : closure()</span>
+<span class="fc" id="L43">            from = from + 1</span>
+        }
+    }
+
+    /**
+     * The next day.
+     */
+    static Instant next(final Instant self) {
+<span class="pc bpc" id="L51" title="2 of 4 branches missed.">        plus(self, 1)</span>
+    }
+
+    /**
+     * The previous day.
+     */
+    static Instant previous(final Instant self) {
+<span class="pc bpc" id="L58" title="2 of 4 branches missed.">        minus(self, 1)</span>
+    }
+
+    /**
+     * Adds the given number of seconds to the Instant, returning a new Instant instance.
+     */
+    static Instant plus(final Instant self, int seconds) {
+<span class="pc" id="L65">        self.plusSeconds(seconds)</span>
+    }
+
+    /**
+     * Subtracts the given number of seconds to the Instant, returning a new Instant instance.
+     */
+    static Instant minus(final Instant self, int seconds) {
+<span class="pc" id="L72">        self.minusSeconds(seconds)</span>
+    }
+
+    /**
+     * Returns a TemporalAmount equivalent to the time between this Instant (inclusive) and the provided Instant (exclusive).
+     */
+    static Duration minus(final Instant self, Instant other) {
+<span class="pc" id="L79">        Duration.between(self, other)</span>
+    }
+
+    /**
+     * Returns the value corresponding to the given TemporalField, provided it is supported by Instant as per its isSupported method.
+     */
+    static getAt(final Instant self, TemporalField field) {
+<span class="pc bfc" id="L86" title="All 2 branches covered.">        field == ChronoField.INSTANT_SECONDS ? self.getLong(field) : self.get(field)</span>
+    }
+
+    /**
+     * Converts a Instant to an equivalent instance of java.util.Date. 
+     */
+    static Date toDate(final Instant self) {
+<span class="pc" id="L93">        new Date(self.toEpochMilli())</span>
+    }
+
+    /**
+     * Converts a Instant to a (mostly) equivalent instance of java.util.Calendar.
+     */
+    static Calendar toCalendar(final Instant self) {
+<span class="pc bpc" id="L100" title="2 of 4 branches missed.">        toDate(self).toCalendar()</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

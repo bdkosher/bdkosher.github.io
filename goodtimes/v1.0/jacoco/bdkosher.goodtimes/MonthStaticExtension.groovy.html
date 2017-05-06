@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MonthStaticExtension.groovy</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">goodtimes</a> &gt; <a href="index.source.html" class="el_package">bdkosher.goodtimes</a> &gt; <span class="el_source">MonthStaticExtension.groovy</span></div><h1>MonthStaticExtension.groovy</h1><pre class="source lang-java linenums">package bdkosher.goodtimes
+
+import java.time.Month
+
+/**
+ * Static extension methods for java.time.Month
+ */
+class MonthStaticExtension {
+
+    /**
+     * The values of the Month enum but starting with the given month.
+     */
+    static Month[] values(final Month type, Month start) {    
+<span class="pc" id="L14">        Month.values().collect { it + start.value - 1} as Month[]</span>
+    }    
+
+    /**
+     * Calls the closure for each month of the year, starting with January.
+     */
+    static void eachMonth(final Month type, Closure closure) {
+<span class="fc" id="L21">        eachMonth(type, Month.JANUARY, closure)</span>
+    }
+
+    /**
+     * Calls the closure for each month of the weyearek, starting with the given month.
+     */
+    static void eachMonth(final Month type, Month start, Closure closure) {
+<span class="fc" id="L28">        def paramTypes = closure.parameterTypes</span>
+<span class="pc bpc" id="L29" title="2 of 4 branches missed.">        boolean acceptsMonth = paramTypes.length &gt; 0 &amp;&amp; paramTypes[0].isAssignableFrom(Month)</span>
+<span class="fc" id="L30">        Month.values(start).each { month -&gt;</span>
+<span class="pc bpc" id="L31" title="1 of 2 branches missed.">            acceptsMonth ? closure(month) : closure()</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

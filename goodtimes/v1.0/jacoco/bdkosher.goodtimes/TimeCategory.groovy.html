@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TimeCategory.groovy</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">goodtimes</a> &gt; <a href="index.source.html" class="el_package">bdkosher.goodtimes</a> &gt; <span class="el_source">TimeCategory.groovy</span></div><h1>TimeCategory.groovy</h1><pre class="source lang-java linenums">package bdkosher.goodtimes
+
+import java.time.*
+import java.time.temporal.ChronoUnit
+
+class TimeCategory {
+
+    static Period getYears(final Integer self) {
+<span class="nc" id="L9">        Period.ofYears(self)</span>
+    }
+
+    static Period getYear(final Integer self) {
+<span class="nc bnc" id="L13" title="All 4 branches missed.">        getYears(self)</span>
+    }
+
+    static Period getMonths(final Integer self) {
+<span class="nc" id="L17">        Period.ofMonths(self)</span>
+    }
+
+    static Period getMonth(final Integer self) {
+<span class="nc bnc" id="L21" title="All 4 branches missed.">        getMonths(self)</span>
+    }
+
+    static Period getWeeks(final Integer self) {
+<span class="nc" id="L25">        Period.ofWeeks(self)</span>
+    }
+
+    static Period getWeek(final Long self) {
+<span class="nc" id="L29">        getWeeks(self)</span>
+    }
+
+    static Duration getDays(final Long self) {
+<span class="nc" id="L33">        Duration.ofDays(self)</span>
+    }
+
+    static Duration getDay(final Long self) {
+<span class="nc bnc" id="L37" title="All 4 branches missed.">        getDays(self)</span>
+    }
+
+    static Duration getHours(final Long self) {
+<span class="nc" id="L41">        Duration.ofHours(self)</span>
+    }
+
+    static Duration getHour(final Long self) {
+<span class="nc bnc" id="L45" title="All 4 branches missed.">        getHours(self)</span>
+    }
+
+    static Duration getMinutes(final Long self) {
+<span class="nc" id="L49">        Duration.ofMinutes(self)</span>
+    }
+
+    static Duration getMinute(final Long self) {
+<span class="nc bnc" id="L53" title="All 4 branches missed.">        getMinutes(self)</span>
+    }
+
+    static Duration getSeconds(final Long self) {
+<span class="nc" id="L57">        Duration.ofSeconds(self)</span>
+    }
+
+    static Duration getSecond(final Long self) {
+<span class="nc bnc" id="L61" title="All 4 branches missed.">        getSeconds(self)</span>
+    }
+
+    static Duration getMilliseconds(final Long self) {
+<span class="nc" id="L65">        Duration.ofMillis(self)</span>
+    }
+
+    static Duration getMillisecond(final Long self) {
+<span class="nc bnc" id="L69" title="All 4 branches missed.">        getMilliseconds(self)</span>
+    }
+
+    static Duration getMs(final Long self) {
+<span class="nc bnc" id="L73" title="All 4 branches missed.">        getMilliseconds(self)</span>
+    }
+
+    static Duration getMicroseconds(final Long self) {
+<span class="nc" id="L77">        Duration.of(self, ChronoUnit.MICROS)</span>
+    }
+
+    static Duration getMicrosecond(final Long self) {
+<span class="nc bnc" id="L81" title="All 4 branches missed.">        getMicroseconds(self)</span>
+    }
+
+    static Duration getÎ¼s(final Long self) {
+<span class="nc bnc" id="L85" title="All 4 branches missed.">        getMicroseconds(self)</span>
+    }    
+
+    static Duration getNanoseconds(final Long self) {
+<span class="nc" id="L89">        Duration.ofNanos(self)</span>
+    }
+
+    static Duration getNanosecond(final Long self) {
+<span class="nc bnc" id="L93" title="All 4 branches missed.">        getNanoseconds(self)</span>
+    }
+
+    static Duration getNs(final Long self) {
+<span class="nc bnc" id="L97" title="All 4 branches missed.">        getNanoseconds(self)</span>
+    }
+
+    static getFrom(final Duration self) {
+<span class="nc" id="L101">        return new Object() {</span>
+            LocalDateTime getNow() {
+<span class="nc" id="L103">                LocalDateTime.now() + self</span>
+            }
+        }
+    }
+
+    static getFrom(final Period self) {
+<span class="nc" id="L109">        return new Object() {</span>
+            LocalDateTime getNow() {
+<span class="nc" id="L111">                LocalDateTime.now() + self</span>
+            }
+        }
+    }
+
+    static getAgo(final Duration self) {
+<span class="nc" id="L117">        return new From() {</span>
+            LocalDateTime getNow() {
+<span class="nc" id="L119">                LocalDateTime.now() - self</span>
+            }
+        }
+    }
+
+    static getAgo(final Period self) {
+<span class="nc" id="L125">        return new From() {</span>
+            LocalDateTime getNow() {
+<span class="nc" id="L127">                LocalDateTime.now() - self</span>
+            }
+        }
+    }
+
+    public static abstract class From {
+        abstract LocalDateTime getNow()
+        LocalDateTime getToday() {
+<span class="nc bnc" id="L135" title="All 4 branches missed.">            getNow()</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

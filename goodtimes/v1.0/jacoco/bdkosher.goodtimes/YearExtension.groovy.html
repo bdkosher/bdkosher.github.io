@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>YearExtension.groovy</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">goodtimes</a> &gt; <a href="index.source.html" class="el_package">bdkosher.goodtimes</a> &gt; <span class="el_source">YearExtension.groovy</span></div><h1>YearExtension.groovy</h1><pre class="source lang-java linenums">package bdkosher.goodtimes
+
+import java.time.*
+import org.codehaus.groovy.runtime.DefaultGroovyMethods
+
+/**
+ * Extension methods for java.time.Year
+ */
+class YearExtension {
+
+    /**
+     * If this year is less than zero, makes it positive.
+     */
+    static Year positive(final Year self) {
+<span class="pc" id="L15">        Year.of(Math.abs(self.value))</span>
+    }
+
+    /**
+     * Negates this year.
+     */
+    static Year negative(final Year self) {
+<span class="pc" id="L22">        Year.of(self.value * -1)</span>
+    }
+
+    /**
+     * Next year.
+     */
+    static Year next(final Year self) {
+<span class="pc bpc" id="L29" title="2 of 4 branches missed.">        plus(self, 1)</span>
+    }
+
+    /**
+     * Last year.
+     */
+    static Year previous(final Year self) {
+<span class="pc bpc" id="L36" title="2 of 4 branches missed.">        minus(self, 1)</span>
+    }
+
+    /**
+     * Adds the given number of years from this year.
+     */
+    static Year plus(final Year self, int years) {
+<span class="pc" id="L43">        self.plusYears(years)</span>
+    }
+
+    /**
+     * Subtracts the given number of years from this year.
+     */
+    static Year minus(final Year self, int years) {
+<span class="pc" id="L50">        self.minusYears(years)</span>
+    }
+
+    /**
+     * Returns the Year that is the sum of this year and the given year.
+     */
+    static Year plus(final Year self, Year other) {
+<span class="pc" id="L57">        Year.of(self.value + other.value)</span>
+    }
+
+    /**
+     * Returns the Year that is the difference between this year and the given year.
+     */
+    static Year minus(final Year self, Year other) {
+<span class="pc" id="L64">        Year.of(self.value - other.value)</span>
+    }
+
+    /**
+     * Returns the YearMonth of this year and the given month.
+     */
+    static YearMonth leftShift(final Year self, Month month) {
+<span class="pc" id="L71">        self.atMonth(month)</span>
+    }
+
+    /**
+     * Returns the LocalDate of this year on the given month/day.
+     */
+    static LocalDate leftShift(final Year self, MonthDay monthDay) {
+<span class="pc" id="L78">        self.atMonthDay(monthDay)</span>
+    }
+
+    /**
+     * Returns the LocalDate of this year on the given day of the year.
+     */
+    static LocalDate leftShift(final Year self, int dayOfYear) {
+<span class="pc" id="L85">        self.atDay(dayOfYear)</span>
+    }
+
+    /**
+     * Permits the conversion of this Year into an integer representation.
+     */
+    static asType(final Year self, Class type) {
+<span class="fc" id="L92">        def originalAsType = Year.&amp;asType</span>
+<span class="fc" id="L93">        switch (type) {</span>
+<span class="fc bfc" id="L94" title="All 2 branches covered.">            case Integer:</span>
+<span class="pc" id="L95">                return self.value as Integer</span>
+<span class="fc bfc" id="L96" title="All 2 branches covered.">            case Long:</span>
+<span class="pc" id="L97">                return self.value as Long</span>
+<span class="fc bfc" id="L98" title="All 2 branches covered.">            case BigInteger:</span>
+<span class="pc" id="L99">                return self.value as BigInteger</span>
+<span class="fc bfc" id="L100" title="All 2 branches covered.">            case Integer.TYPE:</span>
+<span class="pc" id="L101">                return self.value as int</span>
+<span class="fc bfc" id="L102" title="All 2 branches covered.">            case Long.TYPE:</span>
+<span class="fc" id="L103">                return self.value as long</span>
+            default:
+                // XXX not sure this is the best way to implement 
+<span class="pc" id="L106">                return DefaultGroovyMethods.asType(self, type)</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>
