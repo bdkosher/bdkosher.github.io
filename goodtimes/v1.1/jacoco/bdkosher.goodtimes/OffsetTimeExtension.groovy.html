@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>OffsetTimeExtension.groovy</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">goodtimes</a> &gt; <a href="index.source.html" class="el_package">bdkosher.goodtimes</a> &gt; <span class="el_source">OffsetTimeExtension.groovy</span></div><h1>OffsetTimeExtension.groovy</h1><pre class="source lang-java linenums">package bdkosher.goodtimes
+
+import java.time.*
+import java.time.format.DateTimeFormatter
+import java.time.format.FormatStyle
+import java.time.temporal.*
+
+import groovy.transform.PackageScope
+
+/**
+ * Extension methods for java.time.OffsetTime
+ *
+ * Aims to mimic the Groovy JDK extension methods available for java.util.Date and java.util.Calendar instances.
+ */
+class OffsetTimeExtension {
+    
+    /**
+     * Iterates from this OffsetTime down to the given OffsetTime, inclusive, decrementing by one second each time.
+     */
+    static void downto(final OffsetTime self, OffsetTime to, Closure closure) {
+<span class="fc bfc" id="L21" title="All 2 branches covered.">        if (to &gt; self) {</span>
+<span class="fc" id="L22">            throw new GroovyRuntimeException(&quot;The argument ($to) to downto() cannot be later than the value ($self) it's called on.&quot;)</span>
+        }
+<span class="fc" id="L24">        def paramTypes = closure.parameterTypes</span>
+<span class="pc bpc" id="L25" title="10 of 16 branches missed.">        boolean acceptsDate = paramTypes.length &gt; 0 &amp;&amp; paramTypes[0].isAssignableFrom(OffsetTime)</span>
+<span class="fc" id="L26">        def from = self</span>
+<span class="fc bfc" id="L27" title="All 2 branches covered.">        while (from &gt;= to) {</span>
+<span class="pc bpc" id="L28" title="1 of 2 branches missed.">            acceptsDate ? closure(from) : closure()</span>
+<span class="fc" id="L29">            from = from - 1</span>
+        }
+    }
+
+    /**
+     * Iterates from this OffsetTime down to the given OffsetTime, inclusive, decrementing by one second each time.
+     */
+    static void upto(final OffsetTime self, OffsetTime to, Closure closure) {
+<span class="fc bfc" id="L37" title="All 2 branches covered.">        if (to &lt; self) {</span>
+<span class="fc" id="L38">            throw new GroovyRuntimeException(&quot;The argument ($to) to upto() cannot be earlier than the value ($self) it's called on.&quot;)</span>
+        }
+<span class="fc" id="L40">        def paramTypes = closure.parameterTypes</span>
+<span class="pc bpc" id="L41" title="10 of 16 branches missed.">        boolean acceptsDate = paramTypes.length &gt; 0 &amp;&amp; paramTypes[0].isAssignableFrom(OffsetTime)</span>
+<span class="fc" id="L42">        def from = self</span>
+<span class="fc bfc" id="L43" title="All 2 branches covered.">        while (from &lt;= to) {</span>
+<span class="pc bpc" id="L44" title="1 of 2 branches missed.">            acceptsDate ? closure(from) : closure()</span>
+<span class="fc" id="L45">            from = from + 1</span>
+        }
+    }    
+
+    /**
+     * Formats the OffsetTime with the given pattern and optional locale. The default Locale is used if none is provided.
+     */
+    static String format(final OffsetTime self, String pattern, Locale locale = Locale.default) {
+<span class="pc" id="L53">        self.format(DateTimeFormatter.ofPattern(pattern, locale))</span>
+    }
+
+    /**
+     * Formats the OffsetTime in the localized time style.
+     */
+    static String format(final OffsetTime self, FormatStyle timeStyle) {
+<span class="pc" id="L60">        self.format(DateTimeFormatter.ofLocalizedTime(timeStyle))</span>
+    }
+
+    /**
+     * Return a string representation of this time according to the locale-specific FormatStyle#SHORT default format.
+     */
+    static String getTimeString(final OffsetTime self) {
+<span class="pc" id="L67">        format(self, FormatStyle.SHORT)</span>
+    }
+
+    /**
+     * The next second.
+     */
+    static OffsetTime next(final OffsetTime self) {
+<span class="pc bpc" id="L74" title="2 of 4 branches missed.">        plus(self, 1)</span>
+    }
+
+    /**
+     * The previous second.
+     */
+    static OffsetTime previous(final OffsetTime self) {
+<span class="pc bpc" id="L81" title="2 of 4 branches missed.">        minus(self, 1)</span>
+    }    
+
+    /**
+     * Adds the given number of seconds to the OffsetTime, returning a new OffsetTime instance.
+     */
+    static OffsetTime plus(final OffsetTime self, int seconds) {
+<span class="pc" id="L88">        self.plusSeconds(seconds)</span>
+    }
+
+    /**
+     * Subtracts the given number of seconds to the OffsetTime, returning a new OffsetTime instance.
+     */
+    static OffsetTime minus(final OffsetTime self, int seconds) {
+<span class="pc" id="L95">        self.minusSeconds(seconds)</span>
+    }
+
+    /**
+     * Returns a TemporalAmount equivalent to the time between this OffsetTime (inclusive) and the provided OffsetTime (exclusive).
+     */
+    static Duration minus(final OffsetTime self, OffsetTime other) {
+<span class="pc" id="L102">        Duration.between(self, other)</span>
+    }
+
+    /**
+     * Checks if the specified java.util.Calendar field is supported.
+     * This checks if this date can be queried for the specified field. If false, then calling the getAt method will throw an exception.
+     * Note that the supported Calendar fields are a subset of the supported ChronoField values.
+     */
+    static boolean isSupported(final OffsetTime self, int calendarField) {
+<span class="pc bfc" id="L111" title="All 4 branches covered.">        calendarField == Calendar.ZONE_OFFSET || LocalTimeExtension.isSupported(self.toLocalTime(), calendarField)</span>
+    }
+
+    /**
+     * Returns the field of the OffsetTime corresponding to the provided java.util.Calendar field value.
+     */
+    static getAt(final OffsetTime self, int field) {
+<span class="pc bpc" id="L118" title="6 of 12 branches missed.">        if (!isSupported(self, field)) {</span>
+<span class="pc" id="L119">            throw new IllegalArgumentException(&quot;$field is an unrecognized or unsupported java.util.Calendar field value.&quot;)</span>
+        }
+<span class="fc bfc" id="L121" title="All 2 branches covered.">        if (field == Calendar.ZONE_OFFSET) {</span>
+<span class="pc" id="L122">            self.get(ChronoField.OFFSET_SECONDS) * 1000 // ZONE_OFFSET is in milliseconds</span>
+        } else {
+<span class="pc" id="L124">            LocalTimeExtension.getAt(self.toLocalTime(), field)</span>
+        }
+    }
+
+    /**
+     * Returns the value corresponding to the given TemporalField, provided it is supported by OffsetTime as per its isSupported method.
+     */
+    static getAt(final OffsetTime self, TemporalField field) {
+<span class="pc bfc" id="L132" title="All 2 branches covered.">        LocalTimeExtension.LONG_TYPED_FIELDS.contains(field) ? self.getLong(field) : self.get(field)</span>
+    }
+
+    /**
+     * Returns a LocalDateTime of this OffsetTime and the given LocalDate.
+     */
+    static OffsetDateTime leftShift(final OffsetTime self, LocalDate date) {
+<span class="pc" id="L139">        OffsetDateTime.of(date, self.toLocalTime(), self.offset)</span>
+    }    
+
+    /**
+     * Converts a OffsetTime to a (mostly) equivalent instance of java.util.Date. The day-month-year value of the returned Date is now,
+     * and the time is truncated to nearest millisecond.
+     */
+    static Date toDate(final OffsetTime self) {
+<span class="pc bpc" id="L147" title="2 of 4 branches missed.">        toCalendar(self).time</span>
+    }
+
+    /**
+     * Converts a OffsetTime to a (mostly) equivalent instance of java.util.Calendar. The day-month-year value of the returned Date is now
+     * and the Locale is set to the system defaults unless explicitly specified. Time is truncated to nearest millisecond.
+     */
+    static Calendar toCalendar(final OffsetTime self, Locale locale = null) {
+<span class="fc" id="L155">        int offsetMilli = self.offset.totalSeconds * 1000</span>
+<span class="fc" id="L156">        Calendar cal = self.toLocalTime().toCalendar((Locale) locale)</span>
+<span class="fc" id="L157">        cal.set(Calendar.ZONE_OFFSET, offsetMilli)</span>
+<span class="pc" id="L158">        cal</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

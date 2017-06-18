@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DurationExtension.groovy</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">goodtimes</a> &gt; <a href="index.source.html" class="el_package">bdkosher.goodtimes</a> &gt; <span class="el_source">DurationExtension.groovy</span></div><h1>DurationExtension.groovy</h1><pre class="source lang-java linenums">package bdkosher.goodtimes
+
+import java.time.Duration
+import java.time.temporal.ChronoUnit
+import java.time.temporal.TemporalUnit
+import static java.time.temporal.ChronoUnit.*
+
+import groovy.transform.PackageScope
+
+/**
+ * Extension methods for jave.time.Duration
+ */
+class DurationExtension {
+
+    @PackageScope
+<span class="fc" id="L16">    static final Map&lt;String, ChronoUnit&gt; UNIT_KEYS = [D: DAYS, H: HOURS, M: MINUTES, S: SECONDS, N: NANOS].asImmutable()</span>
+
+    /**
+     * Describes this Duration as a Map of ChronoUnit keys (HOURS, MINUTES, SECONDS, and NANOS) and long values. The values
+     * are normalized. For example, &lt;code&gt;Duration.ofSeconds(62).describe()&lt;/code&gt; would return
+     * &lt;code&gt;[ChronoUnit.HOURS) : 0, (ChronoUnit.MINUTES) : 1, (ChronoUnit.SECONDS) : 2, ChronoUnit.NANOS) : 0]&lt;/code&gt;.
+     * If a Duration is negative, then all of the non-zero fields will be negative.
+     */
+    static Map&lt;TemporalUnit, Long&gt; describe(final Duration self) {
+<span class="fc" id="L25">        final int NANO_DIGITS = 9</span>
+<span class="fc" id="L26">        boolean negative = self.negative</span>
+
+<span class="fc" id="L28">        String whole = self.toString() - 'PT'</span>
+
+<span class="pc" id="L30">        def desc = [HOURS, MINUTES, SECONDS, NANOS].collectEntries { u -&gt; [(u) : 0] }</span>
+
+        // handle fractional seconds, if present
+<span class="fc bfc" id="L33" title="All 2 branches covered.">        if (whole.contains('.')) {</span>
+<span class="fc" id="L34">            def parts = (whole - 'S').split(/\./)</span>
+<span class="fc" id="L35">            whole = parts[0] + 'S'</span>
+<span class="pc bpc" id="L36" title="3 of 6 branches missed.">            long nanos = parts[1].padRight(NANO_DIGITS, '0') as long</span>
+<span class="fc bfc" id="L37" title="All 2 branches covered.">            desc[NANOS] = negative ? nanos * -1 : nanos</span>
+        }
+ 
+        // extract non-fractional units
+<span class="fc" id="L41">        def m = whole =~ /\d+\D{1}/</span>
+<span class="fc bfc" id="L42" title="All 2 branches covered.">        while (m.find()) {</span>
+<span class="fc" id="L43">            def valueAndUnit = m.group()</span>
+<span class="fc" id="L44">            String unit = valueAndUnit[-1]</span>
+<span class="fc" id="L45">            long value = valueAndUnit[0..-2] as long</span>
+<span class="fc bfc" id="L46" title="All 2 branches covered.">            desc[UNIT_KEYS[unit]] = negative ? value * -1 : value</span>
+        }
+<span class="pc" id="L48">        desc</span>
+    }
+
+    /**
+     * Increases the length of this Duration by 1 second.
+     */
+    static Duration next(final Duration self) {
+<span class="pc" id="L55">        self.plusSeconds(1)</span>
+    }
+
+    /**
+     * Decreases the length of this Duration by 1 second.
+     */
+    static Duration previous(final Duration self) {
+<span class="pc" id="L62">        self.minusSeconds(1)</span>
+    }
+
+    /**
+     * Adds the given number of seconds to the Duration.
+     */
+    static Duration plus(final Duration self, long seconds) {
+<span class="pc" id="L69">        self.plusSeconds(seconds)</span>
+    }
+
+    /**
+     * Subtracts the given number of seconds to the Duration.
+     */
+    static Duration minus(final Duration self, long seconds) {
+<span class="pc" id="L76">        self.minusSeconds(seconds)</span>
+    }
+
+    /**
+     * Equivalent to calling Duration's negated() method.
+     */
+    static Duration negative(final Duration self) {
+<span class="pc" id="L83">        self.negated()</span>
+    }
+
+    /**
+     * Turns any negative TemporalUnit value positive.
+     */
+    static Duration positive(final Duration self) {
+<span class="pc bfc" id="L90" title="All 2 branches covered.">        self.isNegative() ? self.negated() : self</span>
+    }
+
+    /**
+     * Equivalent to calling Duration's multipliedBy() method.
+     */
+    static Duration multiply(final Duration self, long scalar) {
+<span class="pc" id="L97">        self.multipliedBy(scalar)</span>
+    }
+
+    /**
+     * Equivalent to calling Duration's multipliedBy() method.
+     */
+    static Duration div(final Duration self, long scalar) {
+<span class="pc" id="L104">        self.dividedBy(scalar)</span>
+    }
+
+    /**
+     * Returns the value corresponding to the given TemporalUnit. Only SECONDS and NANOS are supported.
+     */
+    static getAt(final Duration self, TemporalUnit temporalUnit) {
+<span class="pc" id="L111">        self.get(temporalUnit)</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

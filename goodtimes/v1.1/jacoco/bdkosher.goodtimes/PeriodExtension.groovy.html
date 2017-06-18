@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PeriodExtension.groovy</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">goodtimes</a> &gt; <a href="index.source.html" class="el_package">bdkosher.goodtimes</a> &gt; <span class="el_source">PeriodExtension.groovy</span></div><h1>PeriodExtension.groovy</h1><pre class="source lang-java linenums">package bdkosher.goodtimes
+
+import java.time.Period
+import java.time.temporal.*
+
+/**
+ * Extension methods for java.time.Period.
+ */
+class PeriodExtension {
+
+    /**
+     * Describes this Period as a Map of ChronoUnit keys (YEARS, MONTHS, DAYS) and int values.
+     */
+    static describe(final Period self) {
+<span class="pc" id="L15">        [(ChronoUnit.DAYS): self.days, (ChronoUnit.MONTHS): self.months, (ChronoUnit.YEARS): self.years]</span>
+    }
+
+    /**
+     * Returns a new Period containing the values of the provided map (using ChronoUnit enums as keys). For values not specified in Map, 
+     * the existing values of this Period will be used. Thus, an empty Map creates a copy of this Period.
+     */
+    static Period copyWith(final Period self, Map updates) {
+<span class="pc bpc" id="L23" title="2 of 4 branches missed.">        def values = describe(self) + updates</span>
+<span class="pc" id="L24">        int[] args = [ChronoUnit.YEARS, ChronoUnit.MONTHS, ChronoUnit.DAYS].collect { values[it] }</span>
+<span class="pc" id="L25">        Period.of(*args)</span>
+    }
+
+    /**
+     * Increases the length of this Period by 1 day. No normalization is performed.
+     */
+    static Period next(final Period self) {
+<span class="pc" id="L32">        self.plusDays(1)</span>
+    }
+
+    /**
+     * Decreases the length of this Period by 1 day. No normalization is performed.
+     */
+    static Period previous(final Period self) {
+<span class="pc" id="L39">        self.minusDays(1)</span>
+    }
+
+    /**
+     * Equivalent to calling Period's negated() method.
+     */
+    static Period negative(final Period self) {
+<span class="pc" id="L46">        self.negated()</span>
+    }
+
+    /**
+     * Turns any negative TemporalUnit value positive.
+     */
+    static Period positive(final Period self) {
+<span class="pc bpc" id="L53" title="2 of 4 branches missed.">        copyWith(self, describe(self).collectEntries { field, amount -&gt; [(field) : Math.abs(amount)] })</span>
+    }    
+
+    /**
+     * Equivalent to calling Period's multipliedBy() method.
+     */
+    static Period multiply(final Period self, int scalar) {
+<span class="pc" id="L60">        self.multipliedBy(scalar)</span>
+    }
+
+    /**
+     * Returns the value corresponding to the given TemporalField, provided it is supported by Period as per its isSupported method.
+     */
+    static getAt(final Period self, TemporalUnit temporalUnit) {
+<span class="pc" id="L67">        self.get(temporalUnit)</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>
