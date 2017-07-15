@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DayOfWeekExtension.groovy</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">goodtimes</a> &gt; <a href="index.source.html" class="el_package">bdkosher.goodtimes</a> &gt; <span class="el_source">DayOfWeekExtension.groovy</span></div><h1>DayOfWeekExtension.groovy</h1><pre class="source lang-java linenums">package bdkosher.goodtimes
+
+import java.time.DayOfWeek
+import groovy.transform.PackageScope
+import org.codehaus.groovy.runtime.DefaultGroovyMethods
+
+/**
+ * Extension methods for java.time.DayOfWeek
+ */
+class DayOfWeekExtension {
+
+    /* Maps java.time.DayOfWeek enum values to their equivalent Calendar field integer value. */
+    @PackageScope
+<span class="pc" id="L14">    static final Map&lt;DayOfWeek, Integer&gt; dayOfWeekToCalendarDay = DayOfWeek.values().collectEntries { [it, Calendar.@&quot;$it&quot;]}    </span>
+
+    /** 
+     * Returns the DayOfWeek that is {@code days} many days after this DayOfWeek.
+     */
+    static DayOfWeek plus(final DayOfWeek self, int days) {
+<span class="fc" id="L20">        int val = ((self.value + days - 1) % 7) + 1</span>
+<span class="pc bpc" id="L21" title="8 of 16 branches missed.">        DayOfWeek.of(val &gt; 0 ? val : 7 + val)</span>
+    }
+
+    /** 
+     * Returns the DayOfWeek that is {@code days} many days before this DayOfWeek.
+     */
+    static DayOfWeek minus(final DayOfWeek self, int days) {
+<span class="pc" id="L28">        plus(self, days * -1)</span>
+    }
+
+    /**
+     * Returns the DayOfWeek after this DayOfWeek.
+     */
+    static DayOfWeek next(final DayOfWeek self) {
+<span class="pc bpc" id="L35" title="2 of 4 branches missed.">        plus(self, 1)</span>
+    }
+
+    /**
+     * Returns the DayOfWeek before this DayOfWeek.
+     */
+    static DayOfWeek previous(final DayOfWeek self) {
+<span class="pc bpc" id="L42" title="2 of 4 branches missed.">        minus(self, 1)</span>
+    }
+
+    /**
+     * Returns the value of the day-of-week constant defined in the java.util.Calendar class. For example,
+     * &lt;code&gt;assert DayOfWeek.MONDAY.calendarValue() == Calendar.MONDAY&lt;/code&gt;
+     */
+    static int calendarValue(final DayOfWeek self) {
+<span class="pc" id="L50">        dayOfWeekToCalendarDay[self]</span>
+    }
+
+    /**
+     * Returns true if this DayOfWeek is Saturday or Sunday.
+     */
+    static boolean isWeekend(final DayOfWeek self) {
+<span class="pc bpc" id="L57" title="7 of 14 branches missed.">        self == DayOfWeek.SATURDAY || self == DayOfWeek.SUNDAY</span>
+    }
+
+    /**
+     * Returns true if this DayOfWeek is Monday through Friday.
+     */
+    static boolean isWeekday(final DayOfWeek self) {
+<span class="pc bpc" id="L64" title="4 of 8 branches missed.">        !isWeekend(self)</span>
+    }
+
+    /**
+     * Permits the conversion of this DayOfWeek into an integer representation.
+     */
+    static asType(final DayOfWeek self, Class type) {
+<span class="pc bfc" id="L71" title="All 2 branches covered.">        type == String ? self.name() : DefaultGroovyMethods.asType(self.value, type)</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

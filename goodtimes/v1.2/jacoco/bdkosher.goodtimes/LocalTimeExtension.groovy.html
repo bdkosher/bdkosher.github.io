@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LocalTimeExtension.groovy</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">goodtimes</a> &gt; <a href="index.source.html" class="el_package">bdkosher.goodtimes</a> &gt; <span class="el_source">LocalTimeExtension.groovy</span></div><h1>LocalTimeExtension.groovy</h1><pre class="source lang-java linenums">package bdkosher.goodtimes
+
+import java.time.Duration
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.LocalTime
+import java.time.OffsetTime
+import java.time.ZoneOffset
+import java.time.format.DateTimeFormatter
+import java.time.format.FormatStyle
+import java.time.temporal.ChronoField
+import java.time.temporal.ChronoUnit
+import java.time.temporal.TemporalField
+import groovy.transform.PackageScope
+
+/**
+ * Extension methods for java.time.LocalTime
+ *
+ * Aims to mimic the Groovy JDK extension methods available for java.util.Date and java.util.Calendar instances.
+ */
+class LocalTimeExtension {
+
+    /* LocalTime-applicable Calendar fields mapped to their equivalent java.time TemporalField */
+    @PackageScope
+<span class="fc" id="L25">    static final Map&lt;Integer, TemporalField&gt; calendarToTemporalField = [</span>
+        (Calendar.HOUR): ChronoField.HOUR_OF_DAY,
+        (Calendar.MINUTE): ChronoField.MINUTE_OF_HOUR,
+        (Calendar.SECOND): ChronoField.SECOND_OF_MINUTE,
+        (Calendar.MILLISECOND): ChronoField.MILLI_OF_SECOND
+    ].asImmutable()
+
+    @PackageScope
+<span class="fc" id="L33">    static final Set&lt;TemporalField&gt; LONG_TYPED_FIELDS = EnumSet.of(ChronoField.MICRO_OF_DAY, ChronoField.NANO_OF_DAY).asImmutable()</span>
+
+    /**
+     * Iterates from this LocalTime down to the given LocalTime, inclusive, decrementing by one second each time.
+     */
+    static void downto(final LocalTime self, LocalTime to, Closure closure) {
+<span class="fc bfc" id="L39" title="All 2 branches covered.">        if (to &gt; self) {</span>
+<span class="fc" id="L40">            throw new GroovyRuntimeException(&quot;The argument ($to) to downto() cannot be later than the value ($self) it's called on.&quot;)</span>
+        }
+<span class="fc" id="L42">        (self..to).each(closure)</span>
+    }
+
+    /**
+     * Iterates from this LocalTime down to the given LocalTime, inclusive, decrementing by one second each time.
+     */
+    static void upto(final LocalTime self, LocalTime to, Closure closure) {
+<span class="fc bfc" id="L49" title="All 2 branches covered.">        if (to &lt; self) {</span>
+<span class="fc" id="L50">            throw new GroovyRuntimeException(&quot;The argument ($to) to upto() cannot be earlier than the value ($self) it's called on.&quot;)</span>
+        }
+<span class="fc" id="L52">        (self..to).each(closure)</span>
+    }
+
+    /**
+     * Formats the LocalTime with the given pattern and optional locale. The default Locale is used if none is provided.
+     */
+    static String format(final LocalTime self, String pattern, Locale locale = Locale.default) {
+<span class="pc" id="L59">        self.format(DateTimeFormatter.ofPattern(pattern, locale))</span>
+    }
+
+    /**
+     * Formats the LocalTime in the localized time style.
+     */
+    static String format(final LocalTime self, FormatStyle timeStyle) {
+<span class="pc" id="L66">        self.format(DateTimeFormatter.ofLocalizedTime(timeStyle))</span>
+    }
+
+    /**
+     * Return a string representation of this time according to the locale-specific FormatStyle#SHORT default format.
+     */
+    static String getTimeString(final LocalTime self) {
+<span class="pc" id="L73">        format(self, FormatStyle.SHORT)</span>
+    }
+
+    /**
+     * The next second.
+     */
+    static LocalTime next(final LocalTime self) {
+<span class="pc bpc" id="L80" title="2 of 4 branches missed.">        plus(self, 1)</span>
+    }
+
+    /**
+     * The previous second.
+     */
+    static LocalTime previous(final LocalTime self) {
+<span class="pc bpc" id="L87" title="2 of 4 branches missed.">        minus(self, 1)</span>
+    }
+
+    /**
+     * Adds the given number of seconds to the LocalTime, returning a new LocalTime instance.
+     */
+    static LocalTime plus(final LocalTime self, int seconds) {
+<span class="pc" id="L94">        self.plusSeconds(seconds)</span>
+    }
+
+    /**
+     * Subtracts the given number of seconds to the LocalTime, returning a new LocalTime instance.
+     */
+    static LocalTime minus(final LocalTime self, int seconds) {
+<span class="pc" id="L101">        self.minusSeconds(seconds)</span>
+    }
+
+    /**
+     * Returns a TemporalAmount equivalent to the time between this LocalTime (inclusive) and the provided LocalTime (exclusive).
+     */
+    static Duration rightShift(final LocalTime self, LocalTime other) {
+<span class="pc" id="L108">        Duration.between(self, other)</span>
+    }
+
+    /**
+     * Checks if the specified java.util.Calendar field is supported.
+     * This checks if this date can be queried for the specified field. If false, then calling the getAt method will throw an exception.
+     * Note that the supported Calendar fields are a subset of the supported ChronoField values.
+     */
+    static boolean isSupported(final LocalTime self, int calendarField) {
+<span class="fc" id="L117">        TemporalField temporalField = calendarToTemporalField[calendarField]</span>
+<span class="pc bpc" id="L118" title="1 of 4 branches missed.">        temporalField != null &amp;&amp; self.isSupported(temporalField)</span>
+    }
+
+    /**
+     * Returns the field of the LocalTime corresponding to the provided java.util.Calendar field value.
+     */
+    static getAt(final LocalTime self, int field) {
+<span class="pc bpc" id="L125" title="6 of 12 branches missed.">        if (!isSupported(self, field)) {</span>
+<span class="pc" id="L126">            throw new IllegalArgumentException(&quot;$field is an unrecognized or unsupported java.util.Calendar field value.&quot;)</span>
+        }
+<span class="pc" id="L128">        self.get(calendarToTemporalField[field])</span>
+    }
+
+    /**
+     * Returns the value corresponding to the given TemporalField, provided it is supported by LocalTime as per its isSupported method.
+     */
+    static getAt(final LocalTime self, TemporalField field) {
+<span class="pc bfc" id="L135" title="All 2 branches covered.">        LONG_TYPED_FIELDS.contains(field) ? self.getLong(field) : self.get(field)</span>
+    }
+
+    /**
+     * Returns a LocalDateTime of this LocalTime and the given LocalDate.
+     */
+    static LocalDateTime leftShift(final LocalTime self, LocalDate date) {
+<span class="pc" id="L142">        LocalDateTime.of(date, self)</span>
+    }
+
+    /**
+     * Returns an OffsetTime of this LocalTime and the given ZoneOffset.
+     */
+    static OffsetTime leftShift(final LocalTime self, ZoneOffset offset) {
+<span class="pc" id="L149">        OffsetTime.of(self, offset)</span>
+    }
+
+    /**
+     * Converts a LocalTime to a (mostly) equivalent instance of java.util.Date. The day-month-year value of the returned Date is now and
+     * the time is truncated to nearest millisecond.
+     */
+    static Date toDate(final LocalTime self) {
+<span class="pc bpc" id="L157" title="2 of 4 branches missed.">        toCalendar(self).time</span>
+    }
+
+    /**
+     * Converts a LocalTime to a (mostly) equivalent instance of java.util.Calendar for the given Locale. The time value of the returned 
+     * Calendar is cleared and the TimeZone is set to the system default. Time is truncated to nearest millisecond.
+     */
+    static Calendar toCalendar(final LocalTime self, Locale locale) {
+<span class="pc" id="L165">        toCalendar(self, null, locale)</span>
+    }
+
+    /**
+     * Converts a LocalTime to a (mostly) equivalent instance of java.util.Calendar. The time value of the returned Calendar is cleared,
+     * and the TimeZone and Locale are set to system defaults unless explicitly specified. Time is truncated to nearest millisecond.
+     */
+    static Calendar toCalendar(final LocalTime self, TimeZone timeZone = null, Locale locale = null) {
+<span class="fc" id="L173">        int milli = (self.nano - self.truncatedTo(ChronoUnit.SECONDS).nano) / 1e6</span>
+        Calendar cal = timeZone 
+<span class="pc bpc" id="L175" title="3 of 4 branches missed.">                ? (locale ? Calendar.getInstance(timeZone, locale) : Calendar.getInstance(timeZone)) </span>
+<span class="fc bfc" id="L176" title="All 2 branches covered.">                : (locale ? Calendar.getInstance(locale) : Calendar.instance)</span>
+<span class="pc" id="L177">        cal.with {</span>
+<span class="fc" id="L178">            set(Calendar.HOUR_OF_DAY, self.hour)</span>
+<span class="fc" id="L179">            set(Calendar.MINUTE, self.minute)</span>
+<span class="fc" id="L180">            set(Calendar.SECOND, self.second)</span>
+<span class="fc" id="L181">            set(Calendar.MILLISECOND, milli)</span>
+<span class="pc" id="L182">            delegate</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

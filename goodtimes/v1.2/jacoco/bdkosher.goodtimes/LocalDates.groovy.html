@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LocalDates.groovy</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">goodtimes</a> &gt; <a href="index.source.html" class="el_package">bdkosher.goodtimes</a> &gt; <span class="el_source">LocalDates.groovy</span></div><h1>LocalDates.groovy</h1><pre class="source lang-java linenums">package bdkosher.goodtimes
+
+import java.time.LocalDate
+import java.time.Month
+import java.time.Year
+
+/**
+ * By statically importing this class you can create dates using code like this--if you dare:
+ * &lt;pre&gt;
+ * LocalDate thisChristmas = December 25
+ * LocalDate halleysCometReturn = July 28, 2061
+ * &lt;/pre&gt;
+ */
+class LocalDates {
+
+<span class="pc" id="L16">    static January(int day, int year = Year.now().value) {</span>
+<span class="pc" id="L17">        LocalDate.of(year, Month.JANUARY, day)</span>
+    }
+
+<span class="pc" id="L20">    static February(int day, int year = Year.now().value) {</span>
+<span class="pc" id="L21">        LocalDate.of(year, Month.FEBRUARY, day)</span>
+    }
+
+<span class="pc" id="L24">    static March(int day, int year = Year.now().value) {</span>
+<span class="pc" id="L25">        LocalDate.of(year, Month.MARCH, day)</span>
+    }
+
+<span class="pc" id="L28">    static April(int day, int year = Year.now().value) {</span>
+<span class="pc" id="L29">        LocalDate.of(year, Month.APRIL, day)</span>
+    }
+
+<span class="pc" id="L32">    static May(int day, int year = Year.now().value) {</span>
+<span class="pc" id="L33">        LocalDate.of(year, Month.MAY, day)</span>
+    }
+
+<span class="pc" id="L36">    static June(int day, int year = Year.now().value) {</span>
+<span class="pc" id="L37">        LocalDate.of(year, Month.JUNE, day)</span>
+    }
+
+<span class="pc" id="L40">    static July(int day, int year = Year.now().value) {</span>
+<span class="pc" id="L41">        LocalDate.of(year, Month.JULY, day)</span>
+    }
+
+<span class="pc" id="L44">    static August(int day, int year = Year.now().value) {</span>
+<span class="pc" id="L45">        LocalDate.of(year, Month.AUGUST, day)</span>
+    }
+
+<span class="pc" id="L48">    static September(int day, int year = Year.now().value) {</span>
+<span class="pc" id="L49">        LocalDate.of(year, Month.SEPTEMBER, day)</span>
+    }
+
+<span class="pc" id="L52">    static October(int day, int year = Year.now().value) {</span>
+<span class="pc" id="L53">        LocalDate.of(year, Month.OCTOBER, day)</span>
+    }
+
+<span class="pc" id="L56">    static November(int day, int year = Year.now().value) {</span>
+<span class="pc" id="L57">        LocalDate.of(year, Month.NOVEMBER, day)</span>
+    }
+
+<span class="pc" id="L60">    static December(int day, int year = Year.now().value) {</span>
+<span class="pc" id="L61">        LocalDate.of(year, Month.DECEMBER, day)</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

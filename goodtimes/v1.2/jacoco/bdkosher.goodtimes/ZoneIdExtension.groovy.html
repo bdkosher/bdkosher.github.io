@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ZoneIdExtension.groovy</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">goodtimes</a> &gt; <a href="index.source.html" class="el_package">bdkosher.goodtimes</a> &gt; <span class="el_source">ZoneIdExtension.groovy</span></div><h1>ZoneIdExtension.groovy</h1><pre class="source lang-java linenums">package bdkosher.goodtimes
+
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.ZonedDateTime
+import java.time.ZoneId
+import java.time.ZoneOffset
+import java.time.format.TextStyle
+import java.time.temporal.TemporalField
+
+/**
+ * Extension methods for java.time.ZonedId
+ */
+class ZoneIdExtension {
+
+    /**
+     * Returns a java.time.TimeZone equivalent to this ZoneId.
+     */
+    static TimeZone getTimeZone(final ZoneId self) {
+<span class="pc" id="L20">        TimeZone.getTimeZone(self)</span>
+    }
+
+    /**
+     * Returns a the display name using the FULL TextStyle. If an explicit Locale is not provided, the default is assumed.
+     */
+    static String getFullName(final ZoneId self, Locale locale = Locale.default) {
+<span class="pc" id="L27">        self.getDisplayName(TextStyle.FULL, locale)</span>
+    }
+
+    /**
+     * Returns a the display name using the SHORT TextStyle. If an explicit Locale is not provided, the default is assumed.
+     */
+    static String getShortName(final ZoneId self, Locale locale = Locale.default) {
+<span class="pc" id="L34">        self.getDisplayName(TextStyle.SHORT, locale)</span>
+    }
+
+    /**
+     * Returns the ZoneOffset for this ZoneId as of the given Instant. If no Instant is provided, returns the ZoneOffset as of now.
+     */
+<span class="pc" id="L40">    static ZoneOffset getOffset(final ZoneId self, Instant instant = Instant.now()) {</span>
+<span class="pc" id="L41">        self.rules.getOffset(instant)</span>
+    }
+
+    /**
+     * Returns a ZonedDateTime of this ZoneId and the given date time.
+     */
+    static ZonedDateTime leftShift(final ZoneId self, LocalDateTime dateTime) {
+<span class="pc" id="L48">        ZonedDateTime.of(dateTime, self)</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MonthDayExtension.groovy</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">goodtimes</a> &gt; <a href="index.source.html" class="el_package">bdkosher.goodtimes</a> &gt; <span class="el_source">MonthDayExtension.groovy</span></div><h1>MonthDayExtension.groovy</h1><pre class="source lang-java linenums">package bdkosher.goodtimes
+
+import java.time.LocalDate
+import java.time.MonthDay
+import java.time.Year
+import java.time.temporal.TemporalField
+
+/**
+ * Extension methods for java.time.MonthDay
+ */
+class MonthDayExtension {
+
+    /**
+     * Returns a LocalDate of this MonthDay and the given year.
+     */
+    static LocalDate leftShift(final MonthDay self, int year) {
+<span class="pc" id="L17">        self.atYear(year)</span>
+    }
+
+    /**
+     * Returns a LocalDate of this MonthDay and the given year.
+     */
+    static LocalDate leftShift(final MonthDay self, Year year) {
+<span class="pc" id="L24">        year.atMonthDay(self)</span>
+    }
+
+    /**
+     * Returns the value corresponding to the given TemporarlField, provided it is supported as per its isSupported method.
+     */
+    static getAt(final MonthDay self, TemporalField field) {
+<span class="pc" id="L31">        self.get(field)</span>
+    }
+
+    /**
+     * An alias for getDayOfMonth.
+     */
+    static getDay(final MonthDay self) {
+<span class="pc" id="L38">        self.getDayOfMonth()</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

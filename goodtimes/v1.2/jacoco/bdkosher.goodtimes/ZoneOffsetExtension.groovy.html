@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ZoneOffsetExtension.groovy</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">goodtimes</a> &gt; <a href="index.source.html" class="el_package">bdkosher.goodtimes</a> &gt; <span class="el_source">ZoneOffsetExtension.groovy</span></div><h1>ZoneOffsetExtension.groovy</h1><pre class="source lang-java linenums">package bdkosher.goodtimes
+
+import java.time.Duration
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.LocalTime
+import java.time.OffsetDateTime
+import java.time.OffsetTime
+import java.time.ZoneId
+import java.time.ZoneOffset
+import java.time.temporal.ChronoUnit
+import java.time.temporal.TemporalField
+import java.time.temporal.TemporalUnit
+
+/**
+ * Extension methods for java.time.ZoneOffset
+ */
+class ZoneOffsetExtension {
+
+    /**
+     * Describes this ZoneOffset as a Map of ChronoUnit keys (HOURS, MINUTES, and SECONDS) and integer values. The values
+     * are normalized. For example, &lt;code&gt;ZoneOffset.ofTotalSeconds(60 * 60 * 3 + 60 * 15).describe()&lt;/code&gt; would return
+     * &lt;code&gt;[ChronoUnit.HOURS) : 3, (ChronoUnit.MINUTES) : 15, (ChronoUnit.SECONDS) : 0]&lt;/code&gt;.
+     * If a ZoneOffset is negative, then all of the non-zero fields will be negative.
+     */
+    static Map&lt;TemporalUnit, Integer&gt; describe(final ZoneOffset self) {
+<span class="pc" id="L27">        Duration.ofSeconds(self.totalSeconds).describe().findAll { k, v -&gt; k != ChronoUnit.NANOS }</span>
+    }
+
+    /**
+     * Returns the ZoneOffset as a TimeZone. The offset of the TimeZone will be truncated to the nearest minute.
+     */
+    static TimeZone toTimeZone(final ZoneOffset self) {
+<span class="fc bfc" id="L34" title="All 2 branches covered.">        if (self.totalSeconds == 0) {</span>
+<span class="pc" id="L35">            TimeZone.getTimeZone('GMT') </span>
+<span class="fc bfc" id="L36" title="All 2 branches covered.">        } else if (self.totalSeconds % 60 == 0) {</span>
+<span class="pc" id="L37">            TimeZone.getTimeZone(&quot;GMT$self.id&quot;)</span>
+        } else {
+<span class="pc bpc" id="L39" title="2 of 4 branches missed.">            ZoneOffset noSeconds = ZoneOffset.ofHoursMinutes(getHours(self), getMinutes(self))</span>
+<span class="pc" id="L40">            TimeZone.getTimeZone(&quot;GMT$noSeconds.id&quot;)</span>
+        }
+    }
+
+    /**
+     * Adds the given ZoneOffset to this offset.
+     * If the result is outside of the supported range of -18 to +18 hours, a DateTimeException will be thrown.
+     */
+    static ZoneOffset plus(final ZoneOffset self, ZoneOffset other) {
+<span class="pc" id="L49">        ZoneOffset.ofTotalSeconds(self.totalSeconds + other.totalSeconds)</span>
+    }
+
+    /**
+     * Subtracts the given ZoneOffset to this offset.
+     * If the result is outside of the supported range of -18 to +18 hours, a DateTimeException will be thrown.
+     */
+    static ZoneOffset minus(final ZoneOffset self, ZoneOffset other) {
+<span class="pc" id="L57">        ZoneOffset.ofTotalSeconds(self.totalSeconds - other.totalSeconds)</span>
+    }
+
+    /**
+     * Adds the given number of hours to this ZoneOffset, returning a new ZoneOffset for the total hours.
+     * If the result is outside of the supported range of -18 to +18 hours, a DateTimeException will be thrown.
+     */
+    static ZoneOffset plus(final ZoneOffset self, int hours) {
+<span class="pc" id="L65">        plus(self, ZoneOffset.ofHours(hours))</span>
+    }
+
+    /**
+     * Subracts the given number of hours to this ZoneOffset, returning a new ZoneOffset for the total hours.
+     * If the result is outside of the supported range of -18 to +18 hours, a DateTimeException will be thrown.
+     */
+    static ZoneOffset minus(final ZoneOffset self, int hours) {
+<span class="pc" id="L73">        minus(self, ZoneOffset.ofHours(hours))</span>
+    }
+
+    /**
+     * Advances the ZoneOffset by one hour, provided it is not +18 hours. Otherwise, a DateTimeException will be thrown.
+     */
+    static ZoneOffset next(final ZoneOffset self) {
+<span class="pc bpc" id="L80" title="2 of 4 branches missed.">        plus(self, 1)</span>
+    }
+
+    /**
+     * Reduces the ZoneOffset by one hour, provided it is not -18 hours. Otherwise, a DateTimeException will be thrown.
+     */
+    static ZoneOffset previous(final ZoneOffset self) {
+<span class="pc bpc" id="L87" title="2 of 4 branches missed.">        minus(self, 1)</span>
+    }
+
+    /**
+     * If this offset is less than zero, makes it positive.
+     */
+    static ZoneOffset positive(final ZoneOffset self) {
+<span class="pc" id="L94">        ZoneOffset.ofTotalSeconds(Math.abs(self.totalSeconds))</span>
+    }
+
+    /**
+     * Negates this offset.
+     */
+    static ZoneOffset negative(final ZoneOffset self) {
+<span class="pc" id="L101">        ZoneOffset.ofTotalSeconds(Math.negateExact(self.totalSeconds))</span>
+    }
+
+    /**
+     * Returns the hours component of the ZoneOffset.
+     */
+    static int getHours(final ZoneOffset self) {
+<span class="pc bpc" id="L108" title="2 of 4 branches missed.">        describe(self)[ChronoUnit.HOURS]</span>
+    }
+
+    /**
+     * Returns the minutes component of the ZoneOffset. All current, legitimate offsets are in increments of 15 minutes.
+     */
+    static int getMinutes(final ZoneOffset self) {
+<span class="pc bpc" id="L115" title="2 of 4 branches missed.">        describe(self)[ChronoUnit.MINUTES]</span>
+    }
+
+    /**
+     * Returns the seconds component of the ZoneOffset--not the total seconds. All current, legitimate offsets will have a seconds component of 0.
+     */
+    static int getSeconds(final ZoneOffset self) {
+<span class="pc bpc" id="L122" title="2 of 4 branches missed.">        describe(self)[ChronoUnit.SECONDS]</span>
+    }
+
+    /**
+     * Returns the value corresponding to the given TemporalField, provided it is supported by ZoneOffset as per its isSupported method.
+     */
+    static int getAt(final ZoneOffset self, TemporalField field) {
+<span class="pc" id="L129">        self.get(field)</span>
+    }
+
+    /**
+     * Returns an OffsetDateTime of this ZoneOffset and the given date time.
+     */
+    static OffsetDateTime leftShift(final ZoneOffset self, LocalDateTime dateTime) {
+<span class="pc" id="L136">        OffsetDateTime.of(dateTime, self)</span>
+    }
+
+    /**
+     * Returns an OffsetTime of this ZoneOffset and the given time.
+     */
+    static OffsetTime leftShift(final ZoneOffset self, LocalTime time) {
+<span class="pc" id="L143">        OffsetTime.of(time, self)</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>
