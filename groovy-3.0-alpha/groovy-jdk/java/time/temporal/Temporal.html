@@ -116,8 +116,8 @@ unit each iteration, calling the closure once per iteration.
                                         <td>
                                             <code><strong><a href="#upto(java.time.temporal.Temporal, groovy.lang.Closure)">upto</a></strong>(<a href="http://docs.oracle.com/javase/8/docs/api/java/time/temporal/Temporal.html" title="Class in java.time.temporal">Temporal</a> to, <a href="http://docs.groovy-lang.org/latest/html/gapi/groovy/lang/Closure.html" title="Class in groovy.lang">Closure</a> closure)</code>
                                             <br>
-                                            Iterates from the this to <code>to</code>, inclusive, incrementing by one unit each iteration, calling the
-closure once per iteration. 
+                                            Iterates from this to the <code>to</code> <a href="http://docs.oracle.com/javase/8/docs/api/java/time/temporal/Temporal.html" title="Class in java.time.temporal">Temporal</a>, inclusive, incrementing by one
+unit each iteration, calling the closure once per iteration. 
                                         </td>
                                     </tr>
                                     
@@ -128,8 +128,8 @@ closure once per iteration.
                                         <td>
                                             <code><strong><a href="#upto(java.time.temporal.Temporal, java.time.temporal.TemporalUnit, groovy.lang.Closure)">upto</a></strong>(<a href="http://docs.oracle.com/javase/8/docs/api/java/time/temporal/Temporal.html" title="Class in java.time.temporal">Temporal</a> to, <a href="http://docs.oracle.com/javase/8/docs/api/java/time/temporal/TemporalUnit.html" title="Class in java.time.temporal">TemporalUnit</a> unit, <a href="http://docs.groovy-lang.org/latest/html/gapi/groovy/lang/Closure.html" title="Class in groovy.lang">Closure</a> closure)</code>
                                             <br>
-                                            Iterates from this to <code>to</code>, inclusive, incrementing by one <code>unit</code> each iteration,
-calling the closure once per iteration. 
+                                            Iterates from this to the <code>to</code> <a href="http://docs.oracle.com/javase/8/docs/api/java/time/temporal/Temporal.html" title="Class in java.time.temporal">Temporal</a>, inclusive, incrementing by one
+<code>unit</code> each iteration, calling the closure once per iteration. 
                                         </td>
                                     </tr>
                                     
@@ -174,7 +174,7 @@ calling the closure once per iteration.
                                     <p>Iterates from this to the <code>to</code> <a href="http://docs.oracle.com/javase/8/docs/api/java/time/temporal/Temporal.html" title="Class in java.time.temporal">Temporal</a>, inclusive, decrementing by one
 unit each iteration, calling the closure once per iteration. The closure may accept a single
 <a href="http://docs.oracle.com/javase/8/docs/api/java/time/temporal/Temporal.html" title="Class in java.time.temporal">Temporal</a> argument.
-
+<p>
 The particular unit decremented by depends on the specific sub-type of <a href="http://docs.oracle.com/javase/8/docs/api/java/time/temporal/Temporal.html" title="Class in java.time.temporal">Temporal</a>.
 Most sub-types use a unit of <a href="http://docs.oracle.com/javase/8/docs/api/java/time/temporal/ChronoUnit.html#SECONDS" title="Class in java.time.temporal">ChronoUnit#SECONDS</a> except for
 <ul>
@@ -297,8 +297,9 @@ as soon as the current value of the iteration is earlier than the second Tempora
 
                                     <h4>public void <b>upto</b>(<a href="http://docs.oracle.com/javase/8/docs/api/java/time/temporal/Temporal.html" title="Class in java.time.temporal">Temporal</a> to, <a href="http://docs.groovy-lang.org/latest/html/gapi/groovy/lang/Closure.html" title="Class in groovy.lang">Closure</a> closure)</h4>
 
-                                    <p>Iterates from the this to <code>to</code>, inclusive, incrementing by one unit each iteration, calling the
-closure once per iteration. The closure may accept a single <a href="http://docs.oracle.com/javase/8/docs/api/java/time/temporal/Temporal.html" title="Class in java.time.temporal">Temporal</a> argument.
+                                    <p>Iterates from this to the <code>to</code> <a href="http://docs.oracle.com/javase/8/docs/api/java/time/temporal/Temporal.html" title="Class in java.time.temporal">Temporal</a>, inclusive, incrementing by one
+unit each iteration, calling the closure once per iteration. The closure may accept a single
+<a href="http://docs.oracle.com/javase/8/docs/api/java/time/temporal/Temporal.html" title="Class in java.time.temporal">Temporal</a> argument.
 <p>
 The particular unit incremented by depends on the specific sub-type of <a href="http://docs.oracle.com/javase/8/docs/api/java/time/temporal/Temporal.html" title="Class in java.time.temporal">Temporal</a>.
 Most sub-types use a unit of <a href="http://docs.oracle.com/javase/8/docs/api/java/time/temporal/ChronoUnit.html#SECONDS" title="Class in java.time.temporal">ChronoUnit#SECONDS</a> except for
@@ -341,8 +342,8 @@ Most sub-types use a unit of <a href="http://docs.oracle.com/javase/8/docs/api/j
 
                                     <h4>public void <b>upto</b>(<a href="http://docs.oracle.com/javase/8/docs/api/java/time/temporal/Temporal.html" title="Class in java.time.temporal">Temporal</a> to, <a href="http://docs.oracle.com/javase/8/docs/api/java/time/temporal/TemporalUnit.html" title="Class in java.time.temporal">TemporalUnit</a> unit, <a href="http://docs.groovy-lang.org/latest/html/gapi/groovy/lang/Closure.html" title="Class in groovy.lang">Closure</a> closure)</h4>
 
-                                    <p>Iterates from this to <code>to</code>, inclusive, incrementing by one <code>unit</code> each iteration,
-calling the closure once per iteration. The closure may accept a single
+                                    <p>Iterates from this to the <code>to</code> <a href="http://docs.oracle.com/javase/8/docs/api/java/time/temporal/Temporal.html" title="Class in java.time.temporal">Temporal</a>, inclusive, incrementing by one
+<code>unit</code> each iteration, calling the closure once per iteration. The closure may accept a single
 <a href="http://docs.oracle.com/javase/8/docs/api/java/time/temporal/Temporal.html" title="Class in java.time.temporal">Temporal</a> argument.
 
 If the unit is too large to iterate to the second Temporal exactly, such as iterating from two LocalDateTimes

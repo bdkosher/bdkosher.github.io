@@ -76,6 +76,30 @@
                                     
                                     <tr class="altColor">
                                         <td align="right" valign="top" width="1%">
+                                            <span> <code>static <a href="http://docs.oracle.com/javase/8/docs/api/java/time/Period.html" title="Class in java.time">Period</a></code></span>
+                                        </td>
+                                        <td>
+                                            <code><strong><a href="#between(java.time.Year, java.time.Year)">between</a></strong>(<a href="http://docs.oracle.com/javase/8/docs/api/java/time/Year.html" title="Class in java.time">Year</a> startInclusive, <a href="http://docs.oracle.com/javase/8/docs/api/java/time/Year.html" title="Class in java.time">Year</a> endExclusive)</code>
+                                            <br>
+                                            Obtains a Period consisting of the number of years between two <a href="http://docs.oracle.com/javase/8/docs/api/java/time/Year.html" title="Class in java.time">Year</a> instances.
+
+                                        </td>
+                                    </tr>
+                                    
+                                    <tr class="rawColor">
+                                        <td align="right" valign="top" width="1%">
+                                            <span> <code>static <a href="http://docs.oracle.com/javase/8/docs/api/java/time/Period.html" title="Class in java.time">Period</a></code></span>
+                                        </td>
+                                        <td>
+                                            <code><strong><a href="#between(java.time.YearMonth, java.time.YearMonth)">between</a></strong>(<a href="http://docs.oracle.com/javase/8/docs/api/java/time/YearMonth.html" title="Class in java.time">YearMonth</a> startInclusive, <a href="http://docs.oracle.com/javase/8/docs/api/java/time/YearMonth.html" title="Class in java.time">YearMonth</a> endExclusive)</code>
+                                            <br>
+                                            Obtains a Period consisting of the number of years and months between two <a href="http://docs.oracle.com/javase/8/docs/api/java/time/YearMonth.html" title="Class in java.time">YearMonth</a> instances.
+
+                                        </td>
+                                    </tr>
+                                    
+                                    <tr class="altColor">
+                                        <td align="right" valign="top" width="1%">
                                             <span> <code><a href="http://docs.oracle.com/javase/8/docs/api/java/time/Period.html" title="Class in java.time">Period</a></code></span>
                                         </td>
                                         <td>
@@ -171,6 +195,15 @@
                         
                         <ul class="blockList">
                             <li class="blockList">
+                            <h4>Methods inherited from interface java.time.chrono.<a href="http://docs.oracle.com/javase/8/docs/api/java/time/chrono/ChronoPeriod.html" title="Class in java.time.chrono">ChronoPeriod</a></h4>
+                                <p>
+                                    <code><strong><a href="../../java/time/chrono/ChronoPeriod.html#isNonnegative()">isNonnegative</a></strong></code>, <code><strong><a href="../../java/time/chrono/ChronoPeriod.html#isNonpositive()">isNonpositive</a></strong></code>, <code><strong><a href="../../java/time/chrono/ChronoPeriod.html#isPositive()">isPositive</a></strong></code>
+                                </p>
+                            </li>
+                        </ul>
+                        
+                        <ul class="blockList">
+                            <li class="blockList">
                             <h4>Methods inherited from interface java.time.temporal.<a href="http://docs.oracle.com/javase/8/docs/api/java/time/temporal/TemporalAmount.html" title="Class in java.time.temporal">TemporalAmount</a></h4>
                                 <p>
                                     <code><strong><a href="../../java/time/temporal/TemporalAmount.html#getAt(java.time.temporal.TemporalUnit)">getAt</a></strong></code>
@@ -194,6 +227,94 @@
                     <ul class="blockList">
                         <li class="blockList">
                             <h3>Methods Detail</h3>
+
+                            
+                            <a name="between(java.time.Year, java.time.Year)"><!-- --></a>
+
+                            <ul class="blockListLast">
+                                <li class="blockList">
+
+                                    <h4>public static <a href="http://docs.oracle.com/javase/8/docs/api/java/time/Period.html" title="Class in java.time">Period</a> <b>between</b>(<a href="http://docs.oracle.com/javase/8/docs/api/java/time/Year.html" title="Class in java.time">Year</a> startInclusive, <a href="http://docs.oracle.com/javase/8/docs/api/java/time/Year.html" title="Class in java.time">Year</a> endExclusive)</h4>
+
+                                    <p>Obtains a Period consisting of the number of years between two <a href="http://docs.oracle.com/javase/8/docs/api/java/time/Year.html" title="Class in java.time">Year</a> instances.
+The months and days of the Period will be zero.
+The result of this method can be a negative period if the end is before the start.</p>
+
+                                    
+                                    <dl>
+                                        <dt><b>Parameters:</b></dt>
+                                        
+                                        <dd><code>startInclusive</code> -  the start <a href="http://docs.oracle.com/javase/8/docs/api/java/time/Year.html" title="Class in java.time">Year</a>, inclusive, not null</dd>
+                                        
+                                        <dd><code>endExclusive</code> -    the end <a href="http://docs.oracle.com/javase/8/docs/api/java/time/Year.html" title="Class in java.time">Year</a>, exclusive, not null</dd>
+                                        
+                                    </dl>
+                                    
+
+                                    
+                                    <dl>
+                                        <dt><b>Returns:</b></dt>
+                                        <dd>a Period between the years</dd>
+                                    </dl>
+                                    
+
+                                    
+
+                                    
+                                    <dl>
+                                        <dt><b>See Also:</b></dt>
+                                        
+                                        <dd><a href="http://docs.oracle.com/javase/8/docs/api/java/time/Period.html#between(LocalDate, LocalDate)" title="Class in java.time">Period#between(LocalDate, LocalDate)</a></dd>
+                                        
+                                    </dl>
+                                    
+
+                                </li>
+                            </ul>
+
+                            
+                            <a name="between(java.time.YearMonth, java.time.YearMonth)"><!-- --></a>
+
+                            <ul class="blockListLast">
+                                <li class="blockList">
+
+                                    <h4>public static <a href="http://docs.oracle.com/javase/8/docs/api/java/time/Period.html" title="Class in java.time">Period</a> <b>between</b>(<a href="http://docs.oracle.com/javase/8/docs/api/java/time/YearMonth.html" title="Class in java.time">YearMonth</a> startInclusive, <a href="http://docs.oracle.com/javase/8/docs/api/java/time/YearMonth.html" title="Class in java.time">YearMonth</a> endExclusive)</h4>
+
+                                    <p>Obtains a Period consisting of the number of years and months between two <a href="http://docs.oracle.com/javase/8/docs/api/java/time/YearMonth.html" title="Class in java.time">YearMonth</a> instances.
+The days of the Period will be zero.
+The result of this method can be a negative period if the end is before the start.</p>
+
+                                    
+                                    <dl>
+                                        <dt><b>Parameters:</b></dt>
+                                        
+                                        <dd><code>startInclusive</code> -  the start <a href="http://docs.oracle.com/javase/8/docs/api/java/time/YearMonth.html" title="Class in java.time">YearMonth</a>, inclusive, not null</dd>
+                                        
+                                        <dd><code>endExclusive</code> -    the end <a href="http://docs.oracle.com/javase/8/docs/api/java/time/YearMonth.html" title="Class in java.time">YearMonth</a>, exclusive, not null</dd>
+                                        
+                                    </dl>
+                                    
+
+                                    
+                                    <dl>
+                                        <dt><b>Returns:</b></dt>
+                                        <dd>a Period between the year/months</dd>
+                                    </dl>
+                                    
+
+                                    
+
+                                    
+                                    <dl>
+                                        <dt><b>See Also:</b></dt>
+                                        
+                                        <dd><a href="http://docs.oracle.com/javase/8/docs/api/java/time/Period.html#between(LocalDate, LocalDate)" title="Class in java.time">Period#between(LocalDate, LocalDate)</a></dd>
+                                        
+                                    </dl>
+                                    
+
+                                </li>
+                            </ul>
 
                             
                             <a name="minus(long)"><!-- --></a>
