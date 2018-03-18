@@ -100,12 +100,14 @@ unit each iteration, calling the closure once per iteration.
                                     
                                     <tr class="altColor">
                                         <td align="right" valign="top" width="1%">
-                                            <span> <code><a href="http://docs.oracle.com/javase/8/docs/api/java/time/Duration.html" title="Class in java.time">Duration</a></code></span>
+                                            <span> <code><a href="http://docs.oracle.com/javase/8/docs/api/java/time/temporal/TemporalAmount.html" title="Class in java.time.temporal">TemporalAmount</a></code></span>
                                         </td>
                                         <td>
                                             <code><strong><a href="#rightShift(java.time.temporal.Temporal)">rightShift</a></strong>(<a href="http://docs.oracle.com/javase/8/docs/api/java/time/temporal/Temporal.html" title="Class in java.time.temporal">Temporal</a> other)</code>
                                             <br>
-                                            Returns a <a href="http://docs.oracle.com/javase/8/docs/api/java/time/Duration.html" title="Class in java.time">Duration</a> of time between this (inclusive) and <code>other</code> (exclusive).
+                                            Returns a <a href="http://docs.oracle.com/javase/8/docs/api/java/time/Duration.html" title="Class in java.time">Duration</a> or <a href="http://docs.oracle.com/javase/8/docs/api/java/time/Period.html" title="Class in java.time">Period</a> between this (inclusive) and the <code>other</code>
+<a href="http://docs.oracle.com/javase/8/docs/api/java/time/temporal/Temporal.html" title="Class in java.time.temporal">Temporal</a> (exclusive).
+
                                         </td>
                                     </tr>
                                     
@@ -222,7 +224,8 @@ Most sub-types use a unit of <a href="http://docs.oracle.com/javase/8/docs/api/j
 
 If the unit is too large to iterate to the second Temporal exactly, such as iterating from two LocalDateTimes
 that are seconds apart using {@java.time.temporal.ChronoUnit#DAYS} as the unit, the iteration will cease
-as soon as the current value of the iteration is earlier than the second Temporal argument.</p>
+as soon as the current value of the iteration is earlier than the second Temporal argument. The closure will
+not be called with any value earlier than the <code>to</code> value.</p>
 
                                     
                                     <dl>
@@ -257,15 +260,23 @@ as soon as the current value of the iteration is earlier than the second Tempora
                             <ul class="blockListLast">
                                 <li class="blockList">
 
-                                    <h4>public <a href="http://docs.oracle.com/javase/8/docs/api/java/time/Duration.html" title="Class in java.time">Duration</a> <b>rightShift</b>(<a href="http://docs.oracle.com/javase/8/docs/api/java/time/temporal/Temporal.html" title="Class in java.time.temporal">Temporal</a> other)</h4>
+                                    <h4>public <a href="http://docs.oracle.com/javase/8/docs/api/java/time/temporal/TemporalAmount.html" title="Class in java.time.temporal">TemporalAmount</a> <b>rightShift</b>(<a href="http://docs.oracle.com/javase/8/docs/api/java/time/temporal/Temporal.html" title="Class in java.time.temporal">Temporal</a> other)</h4>
 
-                                    <p>Returns a <a href="http://docs.oracle.com/javase/8/docs/api/java/time/Duration.html" title="Class in java.time">Duration</a> of time between this (inclusive) and <code>other</code> (exclusive).</p>
+                                    <p>Returns a <a href="http://docs.oracle.com/javase/8/docs/api/java/time/Duration.html" title="Class in java.time">Duration</a> or <a href="http://docs.oracle.com/javase/8/docs/api/java/time/Period.html" title="Class in java.time">Period</a> between this (inclusive) and the <code>other</code>
+<a href="http://docs.oracle.com/javase/8/docs/api/java/time/temporal/Temporal.html" title="Class in java.time.temporal">Temporal</a> (exclusive).
+<p>
+A Period will be returned for types <a href="http://docs.oracle.com/javase/8/docs/api/java/time/Year.html" title="Class in java.time">Year</a>, <a href="http://docs.oracle.com/javase/8/docs/api/java/time/YearMonth.html" title="Class in java.time">YearMonth</a>, and
+<a href="http://docs.oracle.com/javase/8/docs/api/java/time/chrono/ChronoLocalDate.html" title="Class in java.time.chrono">ChronoLocalDate</a>; otherwise, a Duration will be returned.
+<p>
+Note: if the Temporal is a ChronoLocalDate but not a <a href="http://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html" title="Class in java.time">LocalDate</a>, a general
+<a href="http://docs.oracle.com/javase/8/docs/api/java/time/chrono/ChronoPeriod.html" title="Class in java.time.chrono">ChronoPeriod</a> will be returned as per the return type of the method
+<a href="http://docs.oracle.com/javase/8/docs/api/java/time/chrono/ChronoLocalDate.html#until(ChronoLocalDate)" title="Class in java.time.chrono">ChronoLocalDate#until(ChronoLocalDate)</a> .</p>
 
                                     
                                     <dl>
                                         <dt><b>Parameters:</b></dt>
                                         
-                                        <dd><code>other</code> -  another Temporal</dd>
+                                        <dd><code>other</code> -  another Temporal of the same type</dd>
                                         
                                     </dl>
                                     
@@ -273,7 +284,7 @@ as soon as the current value of the iteration is earlier than the second Tempora
                                     
                                     <dl>
                                         <dt><b>Returns:</b></dt>
-                                        <dd>an Duration between the two Instants</dd>
+                                        <dd>an TemporalAmount between the two Temporals</dd>
                                     </dl>
                                     
 
@@ -348,7 +359,8 @@ Most sub-types use a unit of <a href="http://docs.oracle.com/javase/8/docs/api/j
 
 If the unit is too large to iterate to the second Temporal exactly, such as iterating from two LocalDateTimes
 that are seconds apart using {@java.time.temporal.ChronoUnit#DAYS} as the unit, the iteration will cease
-as soon as the current value of the iteration is later than the second Temporal argument.</p>
+as soon as the current value of the iteration is later than the second Temporal argument. The closure will
+not be called with any value later than the <code>to</code> value.</p>
 
                                     
                                     <dl>

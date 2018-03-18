@@ -776,8 +776,7 @@ encoding.</dd>
             
             
             <dt><a href="java/util/Collection.html#asImmutable()"><b>asImmutable()</b></a> - Method in interface java.util.<a href="java/util/Collection.html">Collection</a></dt>
-            <dd> A convenience method for creating an immutable Collection.
-</dd>
+            <dd> A convenience method for creating an immutable Collection.</dd>
             
             &nbsp;
             
@@ -785,7 +784,8 @@ encoding.</dd>
             
             
             <dt><a href="java/util/List.html#asImmutable()"><b>asImmutable()</b></a> - Method in interface java.util.<a href="java/util/List.html">List</a></dt>
-            <dd> A convenience method for creating an immutable list</dd>
+            <dd> A convenience method for creating an immutable List.
+</dd>
             
             &nbsp;
             
@@ -793,7 +793,7 @@ encoding.</dd>
             
             
             <dt><a href="java/util/Map.html#asImmutable()"><b>asImmutable()</b></a> - Method in interface java.util.<a href="java/util/Map.html">Map</a></dt>
-            <dd> A convenience method for creating an immutable map.</dd>
+            <dd> A convenience method for creating an immutable Map.</dd>
             
             &nbsp;
             
@@ -801,7 +801,7 @@ encoding.</dd>
             
             
             <dt><a href="java/util/Set.html#asImmutable()"><b>asImmutable()</b></a> - Method in interface java.util.<a href="java/util/Set.html">Set</a></dt>
-            <dd> A convenience method for creating an immutable list.</dd>
+            <dd> A convenience method for creating an immutable Set.</dd>
             
             &nbsp;
             
@@ -809,7 +809,7 @@ encoding.</dd>
             
             
             <dt><a href="java/util/SortedMap.html#asImmutable()"><b>asImmutable()</b></a> - Method in interface java.util.<a href="java/util/SortedMap.html">SortedMap</a></dt>
-            <dd> A convenience method for creating an immutable sorted map.</dd>
+            <dd> A convenience method for creating an immutable SortedMap.</dd>
             
             &nbsp;
             
@@ -817,7 +817,7 @@ encoding.</dd>
             
             
             <dt><a href="java/util/SortedSet.html#asImmutable()"><b>asImmutable()</b></a> - Method in interface java.util.<a href="java/util/SortedSet.html">SortedSet</a></dt>
-            <dd> A convenience method for creating an immutable sorted set.</dd>
+            <dd> A convenience method for creating an immutable SortedSet.</dd>
             
             &nbsp;
             
@@ -970,6 +970,55 @@ to the given class using the <code>as</code> operator.
             <dt><a href="java/util/Map.html#asType(java.lang.Class)"><b>asType(java.lang.Class)</b></a> - Method in interface java.util.<a href="java/util/Map.html">Map</a></dt>
             <dd> Coerces this map to the given type, using the map's keys as the public
 method names, and values as the implementation.  </dd>
+            
+            &nbsp;
+            
+            
+            
+            
+            <dt><a href="java/util/Collection.html#asUnmodifiable()"><b>asUnmodifiable()</b></a> - Method in interface java.util.<a href="java/util/Collection.html">Collection</a></dt>
+            <dd> Creates an unmodifiable view of a Collection.</dd>
+            
+            &nbsp;
+            
+            
+            
+            
+            <dt><a href="java/util/List.html#asUnmodifiable()"><b>asUnmodifiable()</b></a> - Method in interface java.util.<a href="java/util/List.html">List</a></dt>
+            <dd> Creates an unmodifiable view of a List.
+</dd>
+            
+            &nbsp;
+            
+            
+            
+            
+            <dt><a href="java/util/Map.html#asUnmodifiable()"><b>asUnmodifiable()</b></a> - Method in interface java.util.<a href="java/util/Map.html">Map</a></dt>
+            <dd> Creates an unmodifiable view of a Map.</dd>
+            
+            &nbsp;
+            
+            
+            
+            
+            <dt><a href="java/util/Set.html#asUnmodifiable()"><b>asUnmodifiable()</b></a> - Method in interface java.util.<a href="java/util/Set.html">Set</a></dt>
+            <dd> Creates an unmodifiable view of a Set.</dd>
+            
+            &nbsp;
+            
+            
+            
+            
+            <dt><a href="java/util/SortedMap.html#asUnmodifiable()"><b>asUnmodifiable()</b></a> - Method in interface java.util.<a href="java/util/SortedMap.html">SortedMap</a></dt>
+            <dd> Creates an unmodifiable view of a SortedMap.</dd>
+            
+            &nbsp;
+            
+            
+            
+            
+            <dt><a href="java/util/SortedSet.html#asUnmodifiable()"><b>asUnmodifiable()</b></a> - Method in interface java.util.<a href="java/util/SortedSet.html">SortedSet</a></dt>
+            <dd> Creates an unmodifiable view of a SortedSet.</dd>
             
             &nbsp;
             
@@ -5529,7 +5578,7 @@ to identify the indices to be selected.</dd>
             
             
             <dt><a href="java/time/LocalDate.html#getDateString()"><b>getDateString()</b></a> - Method in class java.time.<a href="java/time/LocalDate.html">LocalDate</a></dt>
-            <dd> Formats this date in the locale-specific <a href="http://docs.oracle.com/javase/8/docs/api/java/time/format/FormatStyle.html#SHORT" title="Class in java.time.format">FormatStyle#SHORT</a> format style.</dd>
+            <dd> Formats this date with the <a href="http://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html#ISO_LOCAL_DATE" title="Class in java.time.format">DateTimeFormatter#ISO_LOCAL_DATE</a> formatter.</dd>
             
             &nbsp;
             
@@ -5537,8 +5586,7 @@ to identify the indices to be selected.</dd>
             
             
             <dt><a href="java/time/LocalDateTime.html#getDateString()"><b>getDateString()</b></a> - Method in class java.time.<a href="java/time/LocalDateTime.html">LocalDateTime</a></dt>
-            <dd> Formats the date portion of this date/time in the locale-specific
-<a href="http://docs.oracle.com/javase/8/docs/api/java/time/format/FormatStyle.html#SHORT" title="Class in java.time.format">FormatStyle#SHORT</a> format style.</dd>
+            <dd> Formats this date/time with the <a href="http://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html#ISO_LOCAL_DATE" title="Class in java.time.format">DateTimeFormatter#ISO_LOCAL_DATE</a> formatter.</dd>
             
             &nbsp;
             
@@ -5546,8 +5594,7 @@ to identify the indices to be selected.</dd>
             
             
             <dt><a href="java/time/OffsetDateTime.html#getDateString()"><b>getDateString()</b></a> - Method in class java.time.<a href="java/time/OffsetDateTime.html">OffsetDateTime</a></dt>
-            <dd> Formats the date portion of this date/time in the locale-specific
-<a href="http://docs.oracle.com/javase/8/docs/api/java/time/format/FormatStyle.html#SHORT" title="Class in java.time.format">FormatStyle#SHORT</a> format style.</dd>
+            <dd> Formats this date/time with the <a href="http://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html#ISO_OFFSET_DATE" title="Class in java.time.format">DateTimeFormatter#ISO_OFFSET_DATE</a> formatter.</dd>
             
             &nbsp;
             
@@ -5555,8 +5602,8 @@ to identify the indices to be selected.</dd>
             
             
             <dt><a href="java/time/ZonedDateTime.html#getDateString()"><b>getDateString()</b></a> - Method in class java.time.<a href="java/time/ZonedDateTime.html">ZonedDateTime</a></dt>
-            <dd> Formats the date portion of this date/time in the locale-specific
-<a href="http://docs.oracle.com/javase/8/docs/api/java/time/format/FormatStyle.html#SHORT" title="Class in java.time.format">FormatStyle#SHORT</a> format style.</dd>
+            <dd> Formats this date/time with the <a href="http://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html#ISO_LOCAL_DATE" title="Class in java.time.format">DateTimeFormatter#ISO_LOCAL_DATE</a> formatter
+and appends the zone's short name, e.g. </dd>
             
             &nbsp;
             
@@ -5574,7 +5621,7 @@ according to the locale-specific <a href="http://docs.oracle.com/javase/8/docs/a
             
             
             <dt><a href="java/time/LocalDateTime.html#getDateTimeString()"><b>getDateTimeString()</b></a> - Method in class java.time.<a href="java/time/LocalDateTime.html">LocalDateTime</a></dt>
-            <dd> Formats this date/time in the locale-specific <a href="http://docs.oracle.com/javase/8/docs/api/java/time/format/FormatStyle.html#SHORT" title="Class in java.time.format">FormatStyle#SHORT</a> format style.</dd>
+            <dd> Formats this date/time with the <a href="http://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html#ISO_LOCAL_DATE_TIME" title="Class in java.time.format">DateTimeFormatter#ISO_LOCAL_DATE_TIME</a> formatter.</dd>
             
             &nbsp;
             
@@ -5582,7 +5629,7 @@ according to the locale-specific <a href="http://docs.oracle.com/javase/8/docs/a
             
             
             <dt><a href="java/time/OffsetDateTime.html#getDateTimeString()"><b>getDateTimeString()</b></a> - Method in class java.time.<a href="java/time/OffsetDateTime.html">OffsetDateTime</a></dt>
-            <dd> Formats this date/time in the locale-specific <a href="http://docs.oracle.com/javase/8/docs/api/java/time/format/FormatStyle.html#SHORT" title="Class in java.time.format">FormatStyle#SHORT</a> format style.</dd>
+            <dd> Formats this date/time with the <a href="http://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html#ISO_OFFSET_DATE_TIME" title="Class in java.time.format">DateTimeFormatter#ISO_OFFSET_DATE_TIME</a> formatter.</dd>
             
             &nbsp;
             
@@ -5590,7 +5637,8 @@ according to the locale-specific <a href="http://docs.oracle.com/javase/8/docs/a
             
             
             <dt><a href="java/time/ZonedDateTime.html#getDateTimeString()"><b>getDateTimeString()</b></a> - Method in class java.time.<a href="java/time/ZonedDateTime.html">ZonedDateTime</a></dt>
-            <dd> Formats this date/time in the locale-specific <a href="http://docs.oracle.com/javase/8/docs/api/java/time/format/FormatStyle.html#SHORT" title="Class in java.time.format">FormatStyle#SHORT</a> format style.</dd>
+            <dd> Formats this date/time with the <a href="http://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html#ISO_LOCAL_DATE_TIME" title="Class in java.time.format">DateTimeFormatter#ISO_LOCAL_DATE_TIME</a> formatter
+and appends the zone's short name, e.g. </dd>
             
             &nbsp;
             
@@ -5921,8 +5969,7 @@ as a String.</dd>
             
             
             <dt><a href="java/time/LocalDateTime.html#getTimeString()"><b>getTimeString()</b></a> - Method in class java.time.<a href="java/time/LocalDateTime.html">LocalDateTime</a></dt>
-            <dd> Formats the time portion of this date/time in the locale-specific
-<a href="http://docs.oracle.com/javase/8/docs/api/java/time/format/FormatStyle.html#SHORT" title="Class in java.time.format">FormatStyle#SHORT</a> format style.</dd>
+            <dd> Formats this date/time with the <a href="http://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html#ISO_LOCAL_TIME" title="Class in java.time.format">DateTimeFormatter#ISO_LOCAL_TIME</a> formatter.</dd>
             
             &nbsp;
             
@@ -5930,7 +5977,7 @@ as a String.</dd>
             
             
             <dt><a href="java/time/LocalTime.html#getTimeString()"><b>getTimeString()</b></a> - Method in class java.time.<a href="java/time/LocalTime.html">LocalTime</a></dt>
-            <dd> Formats this time in the locale-specific <a href="http://docs.oracle.com/javase/8/docs/api/java/time/format/FormatStyle.html#SHORT" title="Class in java.time.format">FormatStyle#SHORT</a> format style.</dd>
+            <dd> Formats this time with the <a href="http://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html#ISO_LOCAL_TIME" title="Class in java.time.format">DateTimeFormatter#ISO_LOCAL_TIME</a> formatter.</dd>
             
             &nbsp;
             
@@ -5938,8 +5985,7 @@ as a String.</dd>
             
             
             <dt><a href="java/time/OffsetDateTime.html#getTimeString()"><b>getTimeString()</b></a> - Method in class java.time.<a href="java/time/OffsetDateTime.html">OffsetDateTime</a></dt>
-            <dd> Formats the time portion of this date/time in the locale-specific
-<a href="http://docs.oracle.com/javase/8/docs/api/java/time/format/FormatStyle.html#SHORT" title="Class in java.time.format">FormatStyle#SHORT</a> format style.</dd>
+            <dd> Formats this date/time with the <a href="http://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html#ISO_OFFSET_TIME" title="Class in java.time.format">DateTimeFormatter#ISO_OFFSET_TIME</a> formatter.</dd>
             
             &nbsp;
             
@@ -5947,7 +5993,7 @@ as a String.</dd>
             
             
             <dt><a href="java/time/OffsetTime.html#getTimeString()"><b>getTimeString()</b></a> - Method in class java.time.<a href="java/time/OffsetTime.html">OffsetTime</a></dt>
-            <dd> Formats this time in the locale-specific <a href="http://docs.oracle.com/javase/8/docs/api/java/time/format/FormatStyle.html#SHORT" title="Class in java.time.format">FormatStyle#SHORT</a> format style.</dd>
+            <dd> Formats this time with the <a href="http://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html#ISO_OFFSET_TIME" title="Class in java.time.format">DateTimeFormatter#ISO_OFFSET_TIME</a> formatter.</dd>
             
             &nbsp;
             
@@ -5955,8 +6001,8 @@ as a String.</dd>
             
             
             <dt><a href="java/time/ZonedDateTime.html#getTimeString()"><b>getTimeString()</b></a> - Method in class java.time.<a href="java/time/ZonedDateTime.html">ZonedDateTime</a></dt>
-            <dd> Formats the time portion of this date/time in the locale-specific
-<a href="http://docs.oracle.com/javase/8/docs/api/java/time/format/FormatStyle.html#SHORT" title="Class in java.time.format">FormatStyle#SHORT</a> format style.</dd>
+            <dd> Formats this date/time with the <a href="http://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html#ISO_LOCAL_TIME" title="Class in java.time.format">DateTimeFormatter#ISO_LOCAL_TIME</a> formatter
+and appends the zone's short name, e.g. </dd>
             
             &nbsp;
             
@@ -6611,6 +6657,14 @@ classes to implement dynamic proxies easily.</dd>
             
             <dt><a href="java/lang/CharSequence.html#isBigInteger()"><b>isBigInteger()</b></a> - Method in interface java.lang.<a href="java/lang/CharSequence.html">CharSequence</a></dt>
             <dd> Determine if a CharSequence can be parsed as a BigInteger.</dd>
+            
+            &nbsp;
+            
+            
+            
+            
+            <dt><a href="java/lang/CharSequence.html#isBlank()"><b>isBlank()</b></a> - Method in interface java.lang.<a href="java/lang/CharSequence.html">CharSequence</a></dt>
+            <dd> Tests if this CharSequence is blank</dd>
             
             &nbsp;
             
@@ -10997,7 +11051,9 @@ given <a href="http://docs.oracle.com/javase/8/docs/api/java/time/YearMonth.html
             
             
             <dt><a href="java/time/temporal/Temporal.html#rightShift(java.time.temporal.Temporal)"><b>rightShift(java.time.temporal.Temporal)</b></a> - Method in interface java.time.temporal.<a href="java/time/temporal/Temporal.html">Temporal</a></dt>
-            <dd> Returns a <a href="http://docs.oracle.com/javase/8/docs/api/java/time/Duration.html" title="Class in java.time">Duration</a> of time between this (inclusive) and <code>other</code> (exclusive).</dd>
+            <dd> Returns a <a href="http://docs.oracle.com/javase/8/docs/api/java/time/Duration.html" title="Class in java.time">Duration</a> or <a href="http://docs.oracle.com/javase/8/docs/api/java/time/Period.html" title="Class in java.time">Period</a> between this (inclusive) and the <code>other</code>
+<a href="http://docs.oracle.com/javase/8/docs/api/java/time/temporal/Temporal.html" title="Class in java.time.temporal">Temporal</a> (exclusive).
+</dd>
             
             &nbsp;
             
